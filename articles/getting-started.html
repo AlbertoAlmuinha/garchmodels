@@ -85,7 +85,7 @@
 
     
     
-<p><img src="univariate_multivariate_garchmodels.PNG" width="100%" style="display: block; margin: auto;"><br><img src="logo-garchmodels.png" width="147" height="170" align="right"></p>
+<p><img src="univariate_multivariate.png" width="100%" style="display: block; margin: auto;"><br><img src="logo-garchmodels.png" width="147" height="170" align="right"></p>
 <p>This tutorial shows you how you can start using <code>garchmodels</code>. The first thing to be clear about is that the package has two main functions:</p>
 <ul>
 <li><p><strong>garch_reg</strong>: This function implements the univariate models and currently its only engine is <code>rugarch</code>.</p></li>
@@ -374,7 +374,7 @@
 <span class="co">#&gt; Hannan-Quinn -17.069</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Elapsed time : 1.167767</span></code></pre></div>
+<span class="co">#&gt; Elapsed time : 1.09878</span></code></pre></div>
 </div>
 <div id="go-garch-engine" class="section level2">
 <h2 class="hasAnchor">
@@ -406,12 +406,12 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">predictions</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">.name</span> <span class="op">==</span> <span class="st">"garchcoef"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">.pred</span><span class="op">)</span>
 <span class="co">#&gt; $garchcoef</span>
-<span class="co">#&gt;                [,1]         [,2]         [,3]</span>
-<span class="co">#&gt; omega  1.190574e-01 1.156927e-01 2.708797e-02</span>
-<span class="co">#&gt; alpha1 2.485129e-01 1.024468e-01 5.552447e-02</span>
-<span class="co">#&gt; alpha2 3.108558e-10 9.292558e-10 9.233927e-02</span>
-<span class="co">#&gt; beta1  2.741581e-01 3.441257e-01 3.550758e-07</span>
-<span class="co">#&gt; beta2  4.039666e-01 4.406084e-01 8.212757e-01</span></code></pre></div>
+<span class="co">#&gt;                [,1]         [,2]       [,3]</span>
+<span class="co">#&gt; omega  1.207383e-01 1.131583e-01 0.02729730</span>
+<span class="co">#&gt; alpha1 2.508829e-01 9.927154e-02 0.04735301</span>
+<span class="co">#&gt; alpha2 5.965501e-08 3.827350e-09 0.09925788</span>
+<span class="co">#&gt; beta1  2.748711e-01 3.311616e-01 0.11127691</span>
+<span class="co">#&gt; beta2  4.000097e-01 4.591429e-01 0.71083339</span></code></pre></div>
 </div>
 </div>
   </div>
