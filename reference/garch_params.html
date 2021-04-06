@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bridge prediction function for GARCH models — rugarch_multi_predict_impl • garchmodels</title>
+<title>Tuning Parameters for Univariate Garch Models — garch_params • garchmodels</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Bridge prediction function for GARCH models — rugarch_multi_predict_impl" />
-<meta property="og:description" content="Bridge prediction function for GARCH models" />
+<meta property="og:title" content="Tuning Parameters for Univariate Garch Models — garch_params" />
+<meta property="og:description" content="Tuning Parameters for Univariate Garch Models" />
 
 
 
@@ -118,35 +118,65 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Bridge prediction function for GARCH models</h1>
+    <h1>Tuning Parameters for Univariate Garch Models</h1>
     
-    <div class="hidden name"><code>rugarch_multi_predict_impl.Rd</code></div>
+    <div class="hidden name"><code>garch_params.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Bridge prediction function for GARCH models</p>
+    <p>Tuning Parameters for Univariate Garch Models</p>
     </div>
 
-    <pre class="usage"><span class='fu'>rugarch_multi_predict_impl</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>new_data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>arch_order</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0L</span>, <span class='fl'>3L</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>garch_order</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0L</span>, <span class='fl'>3L</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>ar_order</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0L</span>, <span class='fl'>5L</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+
+<span class='fu'>ma_order</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0L</span>, <span class='fl'>5L</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>An object of class <code>model_fit</code></p></td>
+      <th>range</th>
+      <td><p>A two-element vector holding the <em>defaults</em> for the smallest and
+largest possible values, respectively.</p></td>
     </tr>
     <tr>
-      <th>new_data</th>
-      <td><p>A rectangular data object, such as a data frame.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='https://rdrr.io/r/stats/predict.html'>stats::predict()</a></code></p></td>
+      <th>trans</th>
+      <td><p>A <code>trans</code> object from the <code>scales</code> package, such as
+<code><a href='https://scales.r-lib.org/reference/log_trans.html'>scales::log10_trans()</a></code> or <code><a href='https://scales.r-lib.org/reference/reciprocal_trans.html'>scales::reciprocal_trans()</a></code>. If not provided,
+the default is used which matches the units used in <code>range</code>. If no
+transformation, <code>NULL</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>The main parameters for Univariate Garch models are:</p><ul>
+<li><p><code>arch_order</code>: The order corresponding to the ARCH part.</p></li>
+<li><p><code>garch_order</code>: The order corresponding to the GARCH part.</p></li>
+<li><p><code>ar_order</code>: The order of the non-seasonal auto-regressive (AR) terms.</p></li>
+<li><p><code>ma_order</code>: The order of the non-seasonal moving average (MA) terms.</p></li>
+</ul>
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>arch_order</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; ARCH Order Part (quantitative)
+#&gt; Range: [0, 3]</div><div class='input'>
+<span class='fu'>garch_order</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; GARCH Order Part (quantitative)
+#&gt; Range: [0, 3]</div><div class='input'>
+<span class='fu'>ar_order</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Non-seasonal AR Term (quantitative)
+#&gt; Range: [0, 5]</div><div class='input'>
+<span class='fu'>ma_order</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Non-seasonal MA Term (quantitative)
+#&gt; Range: [0, 5]</div><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">garchmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -167,7 +167,6 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Available engines:</p><ul>
-<li><p><strong>garch</strong>: Connects to <code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code></p></li>
 <li><p><strong>rugarch</strong>: Connects to <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html'>rugarch::ugarchspec()</a></code> first and then to <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html'>rugarch::ugarchfit()</a></code>.</p></li>
 </ul>
 
@@ -175,22 +174,6 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
 
     
 
-
-<p><strong>garch</strong></p>
-<p>The engine uses <code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code>.</p>
-<p>Function Parameters:</p><pre><span class='co'>## Registered S3 method overwritten by 'quantmod':</span>
-<span class='co'>##   method            from</span>
-<span class='co'>##   as.zoo.data.frame zoo</span>
-</pre><pre><span class='co'>## function (x, order = c(1, 1), series = NULL, control = garch.control(...), </span>
-<span class='co'>##     ...)</span>
-</pre>
-
-<p>The <strong>ORDER</strong> argument is provided to
-<code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code> via <code>garch_reg()</code> parameters, using <code>arch_order</code> and <code>garch_order</code>
-Other options and arguments can be set using <code>set_engine()</code>.</p>
-<p>Parameter Notes:</p><ul>
-<li><p><code>xreg</code> - This engine does not support xregs, it only works for univariate time series. See Fit Details (below).</p></li>
-</ul>
 
 <p><strong>rugarch (default)</strong></p>
 <p>The engine uses <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html'>rugarch::ugarchspec()</a></code> and <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html'>rugarch::ugarchfit()</a></code>.</p>
@@ -280,7 +263,7 @@ The <code>fit()</code> interface accepts date and date-time features and handles
     <div class='dont-index'><p><code>fit.model_spec()</code>, <code>set_engine()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>garchmodels</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/modeltime'>modeltime</a></span><span class='op'>)</span>
@@ -290,7 +273,7 @@ The <code>fit()</code> interface accepts date and date-time features and handles
 
 <span class='va'>rIBM_extended</span> <span class='op'>&lt;-</span> <span class='va'>rIBM</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://rdrr.io/pkg/timetk/man/future_frame.html'>future_frame</a></span><span class='op'>(</span>.length_out <span class='op'>=</span> <span class='fl'>24</span>, .bind_data <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> 
-</div><div class='output co'>#&gt; <span class='message'>.date_var is missing. Using: date</span></div><div class='input'>
+
 <span class='va'>rIBM_train</span>  <span class='op'>&lt;-</span> <span class='va'>rIBM_extended</span> <span class='op'>%&gt;%</span> <span class='fu'>drop_na</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>rIBM_future</span> <span class='op'>&lt;-</span> <span class='va'>rIBM_extended</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>daily_returns</span><span class='op'>)</span><span class='op'>)</span>
 
@@ -299,22 +282,9 @@ The <code>fit()</code> interface accepts date and date-time features and handles
                                           garch_order <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"rugarch"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>daily_returns</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>rIBM_train</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>frequency = 5 observations per 1 week</span></div><div class='input'>
+
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_garch_fit</span>, <span class='va'>rIBM_future</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 24 x 1</span><span>
-#&gt;       .pred
-#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 0.000</span><span style='text-decoration: underline;'>528</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 0.000</span><span style='text-decoration: underline;'>299</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 0.000</span><span style='text-decoration: underline;'>382</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 0.000</span><span style='text-decoration: underline;'>352</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 0.000</span><span style='text-decoration: underline;'>363</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 0.000</span><span style='text-decoration: underline;'>360</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 0.000</span><span style='text-decoration: underline;'>360</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 0.000</span><span style='text-decoration: underline;'>360</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.000</span><span style='text-decoration: underline;'>360</span><span>
-#&gt; </span><span style='color: #949494;'># … with 14 more rows</span><span></div><div class='input'>
+
 <span class='va'>model_garch_fit</span> <span class='op'>&lt;-</span><span class='fu'>garchmodels</span><span class='fu'>::</span><span class='fu'>garch_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span>,
                                         arch_order <span class='op'>=</span> <span class='fl'>2</span>,
                                         garch_order <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -322,23 +292,10 @@ The <code>fit()</code> interface accepts date and date-time features and handles
                                                 garchOrder<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>,
                mean.model     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>armaOrder<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>daily_returns</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>rIBM_train</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>frequency = 5 observations per 1 week</span></div><div class='input'>
+
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_garch_fit</span>, <span class='va'>rIBM_future</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 24 x 1</span><span>
-#&gt;       .pred
-#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 0.000</span><span style='text-decoration: underline;'>455</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 0.000</span><span style='text-decoration: underline;'>168</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 0.000</span><span style='text-decoration: underline;'>270</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 0.000</span><span style='text-decoration: underline;'>234</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 0.000</span><span style='text-decoration: underline;'>246</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 0.000</span><span style='text-decoration: underline;'>242</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #949494;'># … with 14 more rows</span><span></div><div class='input'> 
-</div></span></pre>
+<span class='op'>}</span> 
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

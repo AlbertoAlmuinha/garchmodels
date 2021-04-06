@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">garchmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -145,12 +145,11 @@
 <p>Let us now predict about the future dataset:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model_fit_garch</span>, <span class="va">rIBM_future</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 x 1</span>
-<span class="co">#&gt;   .pred</span>
-<span class="co">#&gt;   &lt;dbl&gt;</span>
-<span class="co">#&gt; 1     0</span>
-<span class="co">#&gt; 2     0</span>
-<span class="co">#&gt; 3     0</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 2 x 2</span>
+<span class="co">#&gt;   .name     .pred            </span>
+<span class="co">#&gt;   &lt;chr&gt;     &lt;named list&gt;     </span>
+<span class="co">#&gt; 1 sigmaFor  &lt;dbl[,1] [3 × 1]&gt;</span>
+<span class="co">#&gt; 2 seriesFor &lt;dbl[,1] [3 × 1]&gt;</span></code></pre></div>
 <p>We will now create a combined model using a GARCH model for the variance and an ARMA model for the mean:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model_fit_garch</span> <span class="op">&lt;-</span><span class="fu">garchmodels</span><span class="fu">::</span><span class="fu"><a href="../reference/garch_reg.html">garch_reg</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"regression"</span>,
@@ -172,12 +171,11 @@
 <p>Let us now predict about the future dataset:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model_fit_garch</span>, <span class="va">rIBM_future</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 3 x 1</span>
-<span class="co">#&gt;       .pred</span>
-<span class="co">#&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt; 1  0.000817</span>
-<span class="co">#&gt; 2  0.000777</span>
-<span class="co">#&gt; 3 -0.000213</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 2 x 2</span>
+<span class="co">#&gt;   .name     .pred            </span>
+<span class="co">#&gt;   &lt;chr&gt;     &lt;named list&gt;     </span>
+<span class="co">#&gt; 1 sigmaFor  &lt;dbl[,1] [3 × 1]&gt;</span>
+<span class="co">#&gt; 2 seriesFor &lt;dbl[,1] [3 × 1]&gt;</span></code></pre></div>
 </div>
 <div id="multivariate-example" class="section level1">
 <h1 class="hasAnchor">
@@ -330,7 +328,7 @@
 <span class="va">model_fit</span>
 <span class="co">#&gt; parsnip model object</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Fit time:  2.9s </span>
+<span class="co">#&gt; Fit time:  2.1s </span>
 <span class="co">#&gt; Copula GARCH Multivariate Model</span>
 <span class="co">#&gt; $model_1</span>
 <span class="co">#&gt; </span>
@@ -374,7 +372,7 @@
 <span class="co">#&gt; Hannan-Quinn -17.069</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Elapsed time : 1.191918</span></code></pre></div>
+<span class="co">#&gt; Elapsed time : 0.9415255</span></code></pre></div>
 </div>
 <div id="go-garch-engine" class="section level2">
 <h2 class="hasAnchor">
@@ -406,12 +404,12 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">predictions</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">.name</span> <span class="op">==</span> <span class="st">"garchcoef"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">.pred</span><span class="op">)</span>
 <span class="co">#&gt; $garchcoef</span>
-<span class="co">#&gt;              [,1]         [,2]         [,3]</span>
-<span class="co">#&gt; omega  0.02738531 1.144974e-01 1.192831e-01</span>
-<span class="co">#&gt; alpha1 0.04836931 1.004596e-01 2.470703e-01</span>
-<span class="co">#&gt; alpha2 0.09805614 1.352325e-12 3.585285e-11</span>
-<span class="co">#&gt; beta1  0.09844796 3.358525e-01 2.760513e-01</span>
-<span class="co">#&gt; beta2  0.72378538 4.520010e-01 4.028127e-01</span></code></pre></div>
+<span class="co">#&gt;                [,1]         [,2]         [,3]</span>
+<span class="co">#&gt; omega  2.707559e-02 1.198722e-01 1.151032e-01</span>
+<span class="co">#&gt; alpha1 5.560616e-02 2.507437e-01 1.020259e-01</span>
+<span class="co">#&gt; alpha2 9.264944e-02 6.046671e-14 4.165614e-13</span>
+<span class="co">#&gt; beta1  1.113987e-06 2.734149e-01 3.424725e-01</span>
+<span class="co">#&gt; beta2  8.208955e-01 4.024191e-01 4.432363e-01</span></code></pre></div>
 </div>
 </div>
   </div>
