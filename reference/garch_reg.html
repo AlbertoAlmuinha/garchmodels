@@ -132,7 +132,8 @@
   arch_order <span class='op'>=</span> <span class='cn'>NULL</span>,
   garch_order <span class='op'>=</span> <span class='cn'>NULL</span>,
   ar_order <span class='op'>=</span> <span class='cn'>NULL</span>,
-  ma_order <span class='op'>=</span> <span class='cn'>NULL</span>
+  ma_order <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tune_by <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -156,7 +157,12 @@
     </tr>
     <tr>
       <th>ma_order</th>
-      <td><p>An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.</p>
+      <td><p>An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.</p></td>
+    </tr>
+    <tr>
+      <th>tune_by</th>
+      <td><p>Default is set to NULL, when no tuning. If you want to tune, you must choose between "seriesFor" or "sigmaFor" options.
+This will cause the function to not return a nested tibble and be able to tune.</p>
 <p>These arguments are converted to their specific names at the
 time that the model is fit.</p>
 <p>Other options and argument can be
@@ -181,12 +187,9 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
 <p><strong>rugarch (default)</strong></p>
 <p>The engine uses <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html'>rugarch::ugarchspec()</a></code> and <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html'>rugarch::ugarchfit()</a></code>.</p>
 <p>Function Parameters:</p><pre><span class='co'>## Formal class 'standardGeneric' [package "methods"] with 8 slots</span>
-<span class='co'>##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), </span>
-<span class='co'>##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
-<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, </span>
-<span class='co'>##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), </span>
-<span class='co'>##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), </span>
-<span class='co'>##     ...)  </span>
+<span class='co'>##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
+<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, </span>
+<span class='co'>##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  </span>
 <span class='co'>##   ..@ generic   : chr "ugarchspec"</span>
 <span class='co'>##   .. ..- attr(*, "package")= chr "rugarch"</span>
 <span class='co'>##   ..@ package   : chr "rugarch"</span>
@@ -194,12 +197,9 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
 <span class='co'>##   ..@ valueClass: chr(0) </span>
 <span class='co'>##   ..@ signature : chr [1:5] "variance.model" "mean.model" "distribution.model" "start.pars" ...</span>
 <span class='co'>##   ..@ default   :Formal class 'derivedDefaultMethod' [package "methods"] with 4 slots</span>
-<span class='co'>##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), </span>
-<span class='co'>##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
-<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, </span>
-<span class='co'>##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), </span>
-<span class='co'>##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), </span>
-<span class='co'>##     ...)  </span>
+<span class='co'>##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
+<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, </span>
+<span class='co'>##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  </span>
 <span class='co'>##   .. .. ..@ target :Formal class 'signature' [package "methods"] with 3 slots</span>
 <span class='co'>##   .. .. .. .. ..@ .Data  : chr "ANY"</span>
 <span class='co'>##   .. .. .. .. ..@ names  : chr "variance.model"</span>
@@ -210,7 +210,7 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
 <span class='co'>##   .. .. .. .. ..@ package: chr "methods"</span>
 <span class='co'>##   .. .. ..@ generic: chr "ugarchspec"</span>
 <span class='co'>##   .. .. .. ..- attr(*, "package")= chr "rugarch"</span>
-<span class='co'>##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH",      garchOrder = c(1, 1),| __truncated__ ...</span>
+<span class='co'>##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), subm| __truncated__ ...</span>
 </pre>
 
 <p>The Garch order for the variance model is provided using <code>arch_order</code> and <code>garch_order</code> parameters..

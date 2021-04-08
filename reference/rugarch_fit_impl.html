@@ -212,6 +212,7 @@ garch_fit_impl &lt;- function(formula, data, a = 1, g = 1, ar_no_apply = NULL, m
   g <span class='op'>=</span> <span class='fl'>1</span>,
   ar <span class='op'>=</span> <span class='fl'>1</span>,
   ma <span class='op'>=</span> <span class='fl'>1</span>,
+  tune_by <span class='op'>=</span> <span class='cn'>NULL</span>,
   period <span class='op'>=</span> <span class='st'>"auto"</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -242,6 +243,10 @@ garch_fit_impl &lt;- function(formula, data, a = 1, g = 1, ar_no_apply = NULL, m
     <tr>
       <th>ma</th>
       <td><p>The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.</p></td>
+    </tr>
+    <tr>
+      <th>tune_by</th>
+      <td><p>Parameter for tuning.</p></td>
     </tr>
     <tr>
       <th>period</th>
