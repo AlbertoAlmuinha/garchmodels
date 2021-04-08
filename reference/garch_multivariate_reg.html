@@ -147,6 +147,9 @@ but this function facilitates the task through different engines such as rugarch
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A model specfication</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Available engines:</p><ul>
@@ -252,20 +255,46 @@ fit(value ~ date + id, data = rX_longer_train)</p>
     <div class='dont-index'><p><code>fit.model_spec()</code>, <code>set_engine()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>garchmodels</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>── <span style='font-weight: bold;'>Attaching packages</span><span> ────────────────────────────────────── tidymodels 0.1.2 ──</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>broom    </span><span> 0.7.6      </span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>recipes  </span><span> 0.1.15</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>dials    </span><span> 0.0.9      </span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>rsample  </span><span> 0.0.9 </span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>dplyr    </span><span> 1.0.5      </span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>tibble   </span><span> 3.1.0 </span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>ggplot2  </span><span> 3.3.3      </span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>tidyr    </span><span> 1.1.3 </span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>infer    </span><span> 0.5.4      </span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>tune     </span><span> 0.1.3 </span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>modeldata</span><span> 0.1.0      </span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>workflows</span><span> 0.2.2 </span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>purrr    </span><span> 0.3.4      </span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>yardstick</span><span> 0.0.8 </span></div><div class='output co'>#&gt; <span class='message'>── </span><span style='font-weight: bold;'>Conflicts</span><span> ───────────────────────────────────────── tidymodels_conflicts() ──</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>purrr</span><span>::</span><span style='color: #00BB00;'>discard()</span><span> masks </span><span style='color: #0000BB;'>scales</span><span>::discard()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span>  masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>first()</span><span>   masks </span><span style='color: #0000BB;'>rmgarch</span><span>::first()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>lag()</span><span>     masks </span><span style='color: #0000BB;'>stats</span><span>::lag()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>last()</span><span>    masks </span><span style='color: #0000BB;'>rmgarch</span><span>::last()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>purrr</span><span>::</span><span style='color: #00BB00;'>reduce()</span><span>  masks </span><span style='color: #0000BB;'>rugarch</span><span>::reduce()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>recipes</span><span>::</span><span style='color: #00BB00;'>step()</span><span>  masks </span><span style='color: #0000BB;'>stats</span><span>::step()</span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>garchmodels</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/modeltime'>modeltime</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/timetk'>timetk</a></span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>Found more than one class "atomicVector" in cache; using the first, from namespace 'Matrix'</span></div><div class='output co'>#&gt; <span class='message'>Also defined by ‘Rmpfr’</span></div><div class='output co'>#&gt; <span class='message'>── </span><span style='font-weight: bold;'>Attaching packages</span><span> ─────────────────────────────────────── tidyverse 1.3.0 ──</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.4.0     </span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.5.1</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #0000BB;'>stringr</span><span> 1.4.0     </span></div><div class='output co'>#&gt; <span class='message'>── </span><span style='font-weight: bold;'>Conflicts</span><span> ────────────────────────────────────────── tidyverse_conflicts() ──</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>readr</span><span>::</span><span style='color: #00BB00;'>col_factor()</span><span> masks </span><span style='color: #0000BB;'>scales</span><span>::col_factor()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>purrr</span><span>::</span><span style='color: #00BB00;'>discard()</span><span>    masks </span><span style='color: #0000BB;'>scales</span><span>::discard()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span>     masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>first()</span><span>      masks </span><span style='color: #0000BB;'>rmgarch</span><span>::first()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>stringr</span><span>::</span><span style='color: #00BB00;'>fixed()</span><span>    masks </span><span style='color: #0000BB;'>recipes</span><span>::fixed()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>lag()</span><span>        masks </span><span style='color: #0000BB;'>stats</span><span>::lag()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>last()</span><span>       masks </span><span style='color: #0000BB;'>rmgarch</span><span>::last()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>purrr</span><span>::</span><span style='color: #00BB00;'>reduce()</span><span>     masks </span><span style='color: #0000BB;'>rugarch</span><span>::reduce()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> </span><span style='color: #0000BB;'>readr</span><span>::</span><span style='color: #00BB00;'>spec()</span><span>       masks </span><span style='color: #0000BB;'>yardstick</span><span>::spec()</span></div><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/timetk'>timetk</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘lubridate’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    date, intersect, setdiff, union</span></div><div class='input'>
 <span class='va'>rX_longer</span> <span class='op'>&lt;-</span>  <span class='va'>rX_longer</span> <span class='op'>%&gt;%</span>
     <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>date</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>id</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'><a href='https://rdrr.io/pkg/timetk/man/future_frame.html'>future_frame</a></span><span class='op'>(</span>.length_out <span class='op'>=</span> <span class='fl'>3</span>, .bind_data <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>ungroup</span><span class='op'>(</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='message'>.date_var is missing. Using: date</span></div><div class='input'>
 <span class='va'>rX_longer_train</span>  <span class='op'>&lt;-</span> <span class='va'>rX_longer</span> <span class='op'>%&gt;%</span> <span class='fu'>drop_na</span><span class='op'>(</span><span class='op'>)</span>
 <span class='va'>rX_longer_future</span> <span class='op'>&lt;-</span> <span class='va'>rX_longer</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>value</span><span class='op'>)</span><span class='op'>)</span>
 
@@ -278,7 +307,33 @@ fit(value ~ date + id, data = rX_longer_train)</p>
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>value</span> <span class='op'>~</span> <span class='va'>date</span> <span class='op'>+</span> <span class='va'>id</span>, data <span class='op'>=</span> <span class='va'>rX_longer_train</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_fit_garch</span>, new_data <span class='op'>=</span> <span class='va'>rX_longer_future</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* V1 -&gt; V1...1</span>
+#&gt; <span class='message'>* V1 -&gt; V1...2</span></div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* V1 -&gt; V1...3</span></div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* V1 -&gt; V1...1</span>
+#&gt; <span class='message'>* V1 -&gt; V1...2</span></div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* V1 -&gt; V1...3</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 18 x 4</span><span>
+#&gt;    .pred_name .pred_value .pred_date$date .pred_.name
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> rIBM          0.000</span><span style='text-decoration: underline;'>369</span><span> 2018-04-28      Series     
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> rBP           0.000</span><span style='text-decoration: underline;'>476</span><span> 2018-04-28      Series     
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> rGOOG         0.000</span><span style='text-decoration: underline;'>750</span><span> 2018-04-28      Series     
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> rIBM          0.000</span><span style='text-decoration: underline;'>342</span><span> 2018-04-29      Series     
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> rBP           0.000</span><span style='text-decoration: underline;'>465</span><span> 2018-04-29      Series     
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> rGOOG         0.000</span><span style='text-decoration: underline;'>851</span><span> 2018-04-29      Series     
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> rIBM          0.000</span><span style='text-decoration: underline;'>342</span><span> 2018-04-30      Series     
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> rBP           0.000</span><span style='text-decoration: underline;'>465</span><span> 2018-04-30      Series     
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> rGOOG         0.000</span><span style='text-decoration: underline;'>852</span><span> 2018-04-30      Series     
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> rIBM          0.016</span><span style='text-decoration: underline;'>4</span><span>   2018-04-28      Sigma      
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> rBP           0.013</span><span style='text-decoration: underline;'>3</span><span>   2018-04-28      Sigma      
+#&gt; </span><span style='color: #BCBCBC;'>12</span><span> rGOOG         0.019</span><span style='text-decoration: underline;'>5</span><span>   2018-04-28      Sigma      
+#&gt; </span><span style='color: #BCBCBC;'>13</span><span> rIBM          0.016</span><span style='text-decoration: underline;'>2</span><span>   2018-04-29      Sigma      
+#&gt; </span><span style='color: #BCBCBC;'>14</span><span> rBP           0.013</span><span style='text-decoration: underline;'>4</span><span>   2018-04-29      Sigma      
+#&gt; </span><span style='color: #BCBCBC;'>15</span><span> rGOOG         0.019</span><span style='text-decoration: underline;'>6</span><span>   2018-04-29      Sigma      
+#&gt; </span><span style='color: #BCBCBC;'>16</span><span> rIBM          0.016</span><span style='text-decoration: underline;'>0</span><span>   2018-04-30      Sigma      
+#&gt; </span><span style='color: #BCBCBC;'>17</span><span> rBP           0.013</span><span style='text-decoration: underline;'>5</span><span>   2018-04-30      Sigma      
+#&gt; </span><span style='color: #BCBCBC;'>18</span><span> rGOOG         0.019</span><span style='text-decoration: underline;'>6</span><span>   2018-04-30      Sigma      </div><div class='input'>
 
 <span class='co'>#DCC ENGINE</span>
 
@@ -290,7 +345,14 @@ fit(value ~ date + id, data = rX_longer_train)</p>
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>value</span> <span class='op'>~</span> <span class='va'>date</span> <span class='op'>+</span> <span class='va'>id</span>, data <span class='op'>=</span> <span class='va'>rX_longer_train</span><span class='op'>)</span>
 
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_fit_garch</span>, <span class='va'>rX_longer_future</span><span class='op'>)</span> 
-
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 5 x 2</span><span>
+#&gt;   .name .pred                  
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> H     </span><span style='color: #949494;'>&lt;list [1]&gt;</span><span>             
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> R     </span><span style='color: #949494;'>&lt;list [1]&gt;</span><span>             
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Q     </span><span style='color: #949494;'>&lt;list [1]&gt;</span><span>             
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Rbar  </span><span style='color: #949494;'>&lt;list [1]&gt;</span><span>             
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> mu    </span><span style='color: #949494;'>&lt;dbl[,3,1] [3 × 3 × 1]&gt;</span><span></div><div class='input'>
 
 <span class='co'># COPULA ENGINE</span>
 
@@ -307,10 +369,23 @@ fit(value ~ date + id, data = rX_longer_train)</p>
 <span class='va'>model_fit_garch</span> <span class='op'>&lt;-</span> <span class='fu'>garch_multivariate_reg</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"ugarchspec"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
 <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"gogarch_rmgarch"</span> , gogarch_specs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>variance.model <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>garchOrder <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>value</span> <span class='op'>~</span> <span class='va'>date</span> <span class='op'>+</span> <span class='va'>id</span>, data <span class='op'>=</span> <span class='va'>rX_longer_train</span><span class='op'>)</span>
-    
+</div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='output co'>#&gt; <span class='warning'>Warning: the condition has length &gt; 1 and only the first element will be used</span></div><div class='input'>    
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_fit_garch</span>, <span class='va'>rX_longer_future</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 11 x 2</span><span>
+#&gt;    .name         .pred                  
+#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> factor.sigmas </span><span style='color: #949494;'>&lt;dbl[,3,1] [3 × 3 × 1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> mu            </span><span style='color: #949494;'>&lt;dbl[,3,1] [3 × 3 × 1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> A             </span><span style='color: #949494;'>&lt;dbl[,3] [3 × 3]&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> Y             </span><span style='color: #949494;'>&lt;dbl[,3] [2,850 × 3]&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> W             </span><span style='color: #949494;'>&lt;dbl[,3] [3 × 3]&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> K             </span><span style='color: #949494;'>&lt;dbl[,3] [3 × 3]&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> Kinv          </span><span style='color: #949494;'>&lt;dbl[,3] [3 × 3]&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> U             </span><span style='color: #949494;'>&lt;dbl[,3] [3 × 3]&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> arcoef        </span><span style='color: #949494;'>&lt;dbl[,3] [2 × 3]&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'>10</span><span> garchcoef     </span><span style='color: #949494;'>&lt;dbl[,3] [5 × 3]&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'>11</span><span> timer         </span><span style='color: #949494;'>&lt;drtn [1]&gt;</span><span>             </div><div class='input'><span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
