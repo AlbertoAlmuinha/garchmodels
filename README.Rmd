@@ -35,6 +35,8 @@ knitr::opts_chunk$set(
 
 - [__Getting Started with Garchmodels__](https://albertoalmuinha.github.io/garchmodels/articles/getting-started.html): A walkthrough of the tidy modeling approach with the package.
 
+- [__Tuning Univariate Garch Models__](https://albertoalmuinha.github.io/garchmodels/articles/tuning_univariate_algorithms.html): Learn how to tune parameters of univariate garch models.
+
 ## Installation
 
 CRAN version:

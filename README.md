@@ -26,6 +26,10 @@ coverage](https://codecov.io/gh/AlbertoAlmuinha/garchmodels/branch/master/graph/
     Garchmodels**](https://albertoalmuinha.github.io/garchmodels/articles/getting-started.html):
     A walkthrough of the tidy modeling approach with the package.
 
+-   [**Tuning Univariate Garch
+    Models**](https://albertoalmuinha.github.io/garchmodels/articles/tuning_univariate_algorithms.html):
+    Learn how to tune parameters of univariate garch models.
+
 ## Installation
 
 CRAN version:
