@@ -111,7 +111,7 @@ modeltime::new_modeltime_bridge(
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">garchmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -212,6 +212,7 @@ garch_fit_impl &lt;- function(formula, data, a = 1, g = 1, ar_no_apply = NULL, m
   g <span class='op'>=</span> <span class='fl'>1</span>,
   ar <span class='op'>=</span> <span class='fl'>1</span>,
   ma <span class='op'>=</span> <span class='fl'>1</span>,
+  tune_by <span class='op'>=</span> <span class='cn'>NULL</span>,
   period <span class='op'>=</span> <span class='st'>"auto"</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
@@ -244,6 +245,10 @@ garch_fit_impl &lt;- function(formula, data, a = 1, g = 1, ar_no_apply = NULL, m
       <td><p>The order of the non-seasonal auto-regressive (AR) terms. Often denoted "p" in pdq-notation.</p></td>
     </tr>
     <tr>
+      <th>tune_by</th>
+      <td><p>Parameter for tuning.</p></td>
+    </tr>
+    <tr>
       <th>period</th>
       <td><p>Period</p></td>
     </tr>
@@ -253,6 +258,9 @@ garch_fit_impl &lt;- function(formula, data, a = 1, g = 1, ar_no_apply = NULL, m
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A fitted model</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>#' @export

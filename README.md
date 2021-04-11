@@ -28,10 +28,10 @@ coverage](https://codecov.io/gh/AlbertoAlmuinha/garchmodels/branch/master/graph/
 
 ## Installation
 
-Not on CRAN yet:
+CRAN version:
 
 ``` r
-#install.packages("garchmodels")
+install.packages("garchmodels")
 ```
 
 Development version:

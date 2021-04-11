@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">garchmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -132,7 +132,8 @@
   arch_order <span class='op'>=</span> <span class='cn'>NULL</span>,
   garch_order <span class='op'>=</span> <span class='cn'>NULL</span>,
   ar_order <span class='op'>=</span> <span class='cn'>NULL</span>,
-  ma_order <span class='op'>=</span> <span class='cn'>NULL</span>
+  ma_order <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tune_by <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -156,7 +157,12 @@
     </tr>
     <tr>
       <th>ma_order</th>
-      <td><p>An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.</p>
+      <td><p>An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.</p></td>
+    </tr>
+    <tr>
+      <th>tune_by</th>
+      <td><p>Default is set to NULL, when no tuning. If you want to tune, you must choose between "seriesFor" or "sigmaFor" options.
+This will cause the function to not return a nested tibble and be able to tune.</p>
 <p>These arguments are converted to their specific names at the
 time that the model is fit.</p>
 <p>Other options and argument can be
@@ -164,10 +170,12 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A model specification</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Available engines:</p><ul>
-<li><p><strong>garch</strong>: Connects to <code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code></p></li>
 <li><p><strong>rugarch</strong>: Connects to <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html'>rugarch::ugarchspec()</a></code> first and then to <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html'>rugarch::ugarchfit()</a></code>.</p></li>
 </ul>
 
@@ -176,31 +184,12 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
     
 
 
-<p><strong>garch</strong></p>
-<p>The engine uses <code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code>.</p>
-<p>Function Parameters:</p><pre><span class='co'>## Registered S3 method overwritten by 'quantmod':</span>
-<span class='co'>##   method            from</span>
-<span class='co'>##   as.zoo.data.frame zoo</span>
-</pre><pre><span class='co'>## function (x, order = c(1, 1), series = NULL, control = garch.control(...), </span>
-<span class='co'>##     ...)</span>
-</pre>
-
-<p>The <strong>ORDER</strong> argument is provided to
-<code><a href='https://rdrr.io/pkg/tseries/man/garch.html'>tseries::garch()</a></code> via <code>garch_reg()</code> parameters, using <code>arch_order</code> and <code>garch_order</code>
-Other options and arguments can be set using <code>set_engine()</code>.</p>
-<p>Parameter Notes:</p><ul>
-<li><p><code>xreg</code> - This engine does not support xregs, it only works for univariate time series. See Fit Details (below).</p></li>
-</ul>
-
 <p><strong>rugarch (default)</strong></p>
 <p>The engine uses <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html'>rugarch::ugarchspec()</a></code> and <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html'>rugarch::ugarchfit()</a></code>.</p>
 <p>Function Parameters:</p><pre><span class='co'>## Formal class 'standardGeneric' [package "methods"] with 8 slots</span>
-<span class='co'>##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), </span>
-<span class='co'>##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
-<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, </span>
-<span class='co'>##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), </span>
-<span class='co'>##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), </span>
-<span class='co'>##     ...)  </span>
+<span class='co'>##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
+<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, </span>
+<span class='co'>##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  </span>
 <span class='co'>##   ..@ generic   : chr "ugarchspec"</span>
 <span class='co'>##   .. ..- attr(*, "package")= chr "rugarch"</span>
 <span class='co'>##   ..@ package   : chr "rugarch"</span>
@@ -208,12 +197,9 @@ Other options and arguments can be set using <code>set_engine()</code>.</p>
 <span class='co'>##   ..@ valueClass: chr(0) </span>
 <span class='co'>##   ..@ signature : chr [1:5] "variance.model" "mean.model" "distribution.model" "start.pars" ...</span>
 <span class='co'>##   ..@ default   :Formal class 'derivedDefaultMethod' [package "methods"] with 4 slots</span>
-<span class='co'>##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), </span>
-<span class='co'>##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
-<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, </span>
-<span class='co'>##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), </span>
-<span class='co'>##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), </span>
-<span class='co'>##     ...)  </span>
+<span class='co'>##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
+<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, arfima = FALSE, external.regressors = NULL, </span>
+<span class='co'>##         archex = FALSE), distribution.model = "norm", start.pars = list(), fixed.pars = list(), ...)  </span>
 <span class='co'>##   .. .. ..@ target :Formal class 'signature' [package "methods"] with 3 slots</span>
 <span class='co'>##   .. .. .. .. ..@ .Data  : chr "ANY"</span>
 <span class='co'>##   .. .. .. .. ..@ names  : chr "variance.model"</span>
@@ -224,7 +210,7 @@ Other options and arguments can be set using <code>set_engine()</code>.</p>
 <span class='co'>##   .. .. .. .. ..@ package: chr "methods"</span>
 <span class='co'>##   .. .. ..@ generic: chr "ugarchspec"</span>
 <span class='co'>##   .. .. .. ..- attr(*, "package")= chr "rugarch"</span>
-<span class='co'>##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH",      garchOrder = c(1, 1),| __truncated__ ...</span>
+<span class='co'>##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), subm| __truncated__ ...</span>
 </pre>
 
 <p>The Garch order for the variance model is provided using <code>arch_order</code> and <code>garch_order</code> parameters..
@@ -280,7 +266,7 @@ The <code>fit()</code> interface accepts date and date-time features and handles
     <div class='dont-index'><p><code>fit.model_spec()</code>, <code>set_engine()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>garchmodels</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/modeltime'>modeltime</a></span><span class='op'>)</span>
@@ -301,20 +287,11 @@ The <code>fit()</code> interface accepts date and date-time features and handles
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>daily_returns</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>rIBM_train</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>frequency = 5 observations per 1 week</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_garch_fit</span>, <span class='va'>rIBM_future</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 24 x 1</span><span>
-#&gt;       .pred
-#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 0.000</span><span style='text-decoration: underline;'>527</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 0.000</span><span style='text-decoration: underline;'>298</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 0.000</span><span style='text-decoration: underline;'>381</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 0.000</span><span style='text-decoration: underline;'>351</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 0.000</span><span style='text-decoration: underline;'>362</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 0.000</span><span style='text-decoration: underline;'>358</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.000</span><span style='text-decoration: underline;'>359</span><span>
-#&gt; </span><span style='color: #949494;'># ... with 14 more rows</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 2</span><span>
+#&gt;   .name     .pred             
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> sigmaFor  </span><span style='color: #949494;'>&lt;dbl[,1] [24 x 1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> seriesFor </span><span style='color: #949494;'>&lt;dbl[,1] [24 x 1]&gt;</span><span></div><div class='input'>
 <span class='va'>model_garch_fit</span> <span class='op'>&lt;-</span><span class='fu'>garchmodels</span><span class='fu'>::</span><span class='fu'>garch_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span>,
                                         arch_order <span class='op'>=</span> <span class='fl'>2</span>,
                                         garch_order <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -324,20 +301,11 @@ The <code>fit()</code> interface accepts date and date-time features and handles
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>daily_returns</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>rIBM_train</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>frequency = 5 observations per 1 week</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_garch_fit</span>, <span class='va'>rIBM_future</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 24 x 1</span><span>
-#&gt;       .pred
-#&gt;       </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 0.000</span><span style='text-decoration: underline;'>453</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 0.000</span><span style='text-decoration: underline;'>168</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 0.000</span><span style='text-decoration: underline;'>269</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 0.000</span><span style='text-decoration: underline;'>233</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 0.000</span><span style='text-decoration: underline;'>246</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 0.000</span><span style='text-decoration: underline;'>242</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.000</span><span style='text-decoration: underline;'>243</span><span>
-#&gt; </span><span style='color: #949494;'># ... with 14 more rows</span><span></div><div class='input'> 
+</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 2</span><span>
+#&gt;   .name     .pred             
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span><span>      
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> sigmaFor  </span><span style='color: #949494;'>&lt;dbl[,1] [24 x 1]&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> seriesFor </span><span style='color: #949494;'>&lt;dbl[,1] [24 x 1]&gt;</span><span></div><div class='input'><span class='co'># } </span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
