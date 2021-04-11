@@ -1,6 +1,6 @@
 Package: garchmodels
-Title: The Tidymodels Extension for GARCH Models 
-Version: 0.1.0
+Title: The 'Tidymodels' Extension for GARCH Models 
+Version: 0.1.1
 Authors@R: c(
     person("Alberto", "Almuiña", email = "albertogonzalezalmuinha@gmail.com", role = c("aut", "cre"))
     )

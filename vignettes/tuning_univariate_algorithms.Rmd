@@ -1,0 +1,123 @@
+---
+title: "Tuning Univariate Garch Models"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tuning Univariate Garch Models}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  
+  out.width='100%',
+  fig.align = "center",
+  fig.width = 7,
+  fig.height = 5,
+  
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+<img src="logo-garchmodels.png" width="147" height="170" align="right" />
+
+This short tutorial teaches you how to tune parameters of univariate garch models. The function used for this type of models is the `garch_reg()` function and the parameters that you can tune are the following:
+
+- __arch_order__: An integer giving the order of the ARCH part for the variance model.
+
+- __garch_order__: An integer giving the order of the GARCH part for the variance model.
+
+- __ar_order__: An integer giving the order of the autoregressive part for the mean model.
+
+- __ma_order__: An integer giving the order of the moving averages part for the mean model.
+
+
+# Example
+
+First, we load the packages:
+
+```{r}
+library(garchmodels)
+library(timetk)
+library(tidyverse)
+library(tidymodels)
+```
+
+We will use the rIBM dataset which is a tibble containing a date column and another column with the daily returns for the IBM company from 2007 to 2020. Extenderemos este dataset en el horizonte temporal tres fechas We will extend this dataset over the forecast horizon three dates and create our training and future dataset.
+
+```{r}
+rIBM
+```
+
+
+```{r}
+rIBM_extended <- rIBM %>%
+    future_frame(.length_out = 3, .bind_data = TRUE) 
+
+rIBM_train  <- rIBM_extended %>% drop_na()
+rIBM_future <- rIBM_extended %>% filter(is.na(daily_returns))
+```
+
+Next, we define the model specification and mark which parameters we are going to tune. It is also necessary to use the `tune_by` argument in which we must specify either __sigmaFor__ or __seriesFor__ to refer to the series forecasts or sigma forecasts (based on these forecasts will be used in the tuning process and the metrics will be calculated).
+
+```{r}
+# Model Spec
+model_spec <-garchmodels::garch_reg(mode = "regression",
+                                    arch_order = tune(),
+                                    garch_order = tune(),
+                                    tune_by = "sigmaFor") %>%
+    set_engine("rugarch") 
+```
+
+The next step is to create a recipe in which we specify the formula we will use:
+
+```{r}
+# Recipe spec
+recipe_spec <- recipe(daily_returns ~ date, data = rIBM_train) 
+```
+
+We put everything together in a workflow:
+
+```{r}
+# Workflow
+wflw <- workflow() %>%
+    add_recipe(recipe_spec) %>%
+    add_model(model_spec)
+```
+
+Next, we need to generate the resamples. As it is a time series problem, the order is important in our observations so we will use the `timetk` function and visualize:
+
+```{r}
+resamples <- timetk::time_series_cv(rIBM_train, 
+                                    date_var = date, 
+                                    initial = "6 years", 
+                                    assess = "24 months",
+                                    skip = "24 months",
+                                    cumulative = TRUE,
+                                    slice_limit = 3)
+
+timetk::plot_time_series_cv_plan(resamples, .date_var = date, .value = daily_returns)
+```
+
+Finally, we use the `tune_grid()` function to apply the workflow on the resamples in a parallel way.
+
+```{r}
+tune_results <- tune_grid(
+    object     = wflw,
+    resamples  = resamples,
+    param_info = parameters(wflw),
+    grid       = 5,
+    control    = control_grid(verbose = TRUE, allow_par = TRUE, parallel_over = "everything")
+)
+```
+
+Finally, we can see which are the best results ordered by RMSE:
+
+```{r}
+tune_results %>% show_best(metric = "rmse")
+```
+
+

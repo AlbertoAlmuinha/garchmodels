@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">garchmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -55,6 +55,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/getting-started.html">Getting Started with garchmodels</a>
+    </li>
+    <li>
+      <a href="../articles/tuning_univariate_algorithms.html">Tuning Univariate Garch Models</a>
     </li>
   </ul>
 </li>
@@ -328,7 +331,7 @@
 <span class="va">model_fit</span>
 <span class="co">#&gt; parsnip model object</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Fit time:  4.2s </span>
+<span class="co">#&gt; Fit time:  2.7s </span>
 <span class="co">#&gt; Copula GARCH Multivariate Model</span>
 <span class="co">#&gt; $model_1</span>
 <span class="co">#&gt; </span>
@@ -372,7 +375,7 @@
 <span class="co">#&gt; Hannan-Quinn -17.069</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Elapsed time : 1.248147</span></code></pre></div>
+<span class="co">#&gt; Elapsed time : 1.196305</span></code></pre></div>
 </div>
 <div id="go-garch-engine" class="section level2">
 <h2 class="hasAnchor">
@@ -404,12 +407,12 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">predictions</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">.name</span> <span class="op">==</span> <span class="st">"garchcoef"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">.pred</span><span class="op">)</span>
 <span class="co">#&gt; $garchcoef</span>
-<span class="co">#&gt;                [,1]         [,2]       [,3]</span>
-<span class="co">#&gt; omega  1.138785e-01 1.196074e-01 0.02731672</span>
-<span class="co">#&gt; alpha1 9.962936e-02 2.472899e-01 0.04760858</span>
-<span class="co">#&gt; alpha2 1.007062e-12 3.719681e-14 0.09881323</span>
-<span class="co">#&gt; beta1  3.324711e-01 2.764209e-01 0.10781081</span>
-<span class="co">#&gt; beta2  4.567983e-01 4.019747e-01 0.71447006</span></code></pre></div>
+<span class="co">#&gt;                [,1]       [,2]         [,3]</span>
+<span class="co">#&gt; omega  1.528795e-01 0.07199215 8.999431e-02</span>
+<span class="co">#&gt; alpha1 3.712887e-01 0.07959069 1.303947e-01</span>
+<span class="co">#&gt; alpha2 5.300584e-10 0.12952498 8.217545e-09</span>
+<span class="co">#&gt; beta1  2.282172e-01 0.02991161 9.621499e-02</span>
+<span class="co">#&gt; beta2  3.376251e-01 0.67647792 6.818771e-01</span></code></pre></div>
 </div>
 </div>
   </div>

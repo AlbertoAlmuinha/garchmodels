@@ -2,10 +2,10 @@
 #' General Interface for GARCH Models
 #'
 #' @param mode A single character string for the type of model.
-#' @param arch_order An integer giving the order of the ARCH part for the variance model. Applies to both garch and rugarch engines.
-#' @param garch_order An integer giving the order of the GARCH part for the variance model. Applies to both garch and rugarch engines.
-#' @param ar_order An integer giving the order of the AR part for the mean model. Only applies to rugarch engine.
-#' @param ma_order An integer giving the order of the MA part for the mean model. Only applies to rugarch engine.
+#' @param arch_order An integer giving the order of the ARCH part for the variance model. 
+#' @param garch_order An integer giving the order of the GARCH part for the variance model. 
+#' @param ar_order An integer giving the order of the AR part for the mean model. 
+#' @param ma_order An integer giving the order of the MA part for the mean model. 
 #' @param tune_by Default is set to NULL, when no tuning. If you want to tune, you must choose between "seriesFor" or "sigmaFor" options. 
 #' This will cause the function to not return a nested tibble and be able to tune.
 #' 
