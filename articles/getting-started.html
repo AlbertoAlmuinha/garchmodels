@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">garchmodels</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -55,6 +55,9 @@
   <ul class="dropdown-menu" role="menu">
 <li>
       <a href="../articles/getting-started.html">Getting Started with garchmodels</a>
+    </li>
+    <li>
+      <a href="../articles/tuning_univariate_algorithms.html">Tuning Univariate Garch Models</a>
     </li>
   </ul>
 </li>
@@ -328,7 +331,7 @@
 <span class="va">model_fit</span>
 <span class="co">#&gt; parsnip model object</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Fit time:  2.6s </span>
+<span class="co">#&gt; Fit time:  3s </span>
 <span class="co">#&gt; Copula GARCH Multivariate Model</span>
 <span class="co">#&gt; $model_1</span>
 <span class="co">#&gt; </span>
@@ -372,7 +375,7 @@
 <span class="co">#&gt; Hannan-Quinn -17.069</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Elapsed time : 1.18813</span></code></pre></div>
+<span class="co">#&gt; Elapsed time : 1.500013</span></code></pre></div>
 </div>
 <div id="go-garch-engine" class="section level2">
 <h2 class="hasAnchor">
@@ -404,12 +407,12 @@
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">predictions</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">.name</span> <span class="op">==</span> <span class="st">"garchcoef"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">.pred</span><span class="op">)</span>
 <span class="co">#&gt; $garchcoef</span>
-<span class="co">#&gt;                [,1]         [,2]         [,3]</span>
-<span class="co">#&gt; omega  1.148702e-01 2.706482e-02 1.198354e-01</span>
-<span class="co">#&gt; alpha1 1.015668e-01 5.565678e-02 2.500844e-01</span>
-<span class="co">#&gt; alpha2 7.625719e-11 9.288193e-02 1.043460e-12</span>
-<span class="co">#&gt; beta1  3.405554e-01 9.371235e-08 2.740211e-01</span>
-<span class="co">#&gt; beta2  4.458341e-01 8.206193e-01 4.022878e-01</span></code></pre></div>
+<span class="co">#&gt;                [,1]         [,2]       [,3]</span>
+<span class="co">#&gt; omega  1.132189e-01 1.203705e-01 0.02729399</span>
+<span class="co">#&gt; alpha1 9.908660e-02 2.493712e-01 0.04730348</span>
+<span class="co">#&gt; alpha2 1.042623e-11 2.543985e-14 0.09934702</span>
+<span class="co">#&gt; beta1  3.303520e-01 2.757128e-01 0.11183116</span>
+<span class="co">#&gt; beta2  4.600814e-01 4.005378e-01 0.71024025</span></code></pre></div>
 </div>
 </div>
   </div>
