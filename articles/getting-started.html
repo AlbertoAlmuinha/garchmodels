@@ -102,7 +102,7 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">garchmodels</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/business-science/timetk">timetk</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidymodels.tidymodels.org">tidymodels</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 <p>The data we will use is IBM’s daily returns from March 2007 through December 2020. The data is contained in a tibble that comes with the garchmodels package itself.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rIBM</span>
@@ -331,7 +331,7 @@
 <span class="va">model_fit</span>
 <span class="co">#&gt; parsnip model object</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Fit time:  3.4s </span>
+<span class="co">#&gt; Fit time:  3.1s </span>
 <span class="co">#&gt; Copula GARCH Multivariate Model</span>
 <span class="co">#&gt; $model_1</span>
 <span class="co">#&gt; </span>
@@ -375,7 +375,7 @@
 <span class="co">#&gt; Hannan-Quinn -17.069</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Elapsed time : 1.797163</span></code></pre></div>
+<span class="co">#&gt; Elapsed time : 1.651215</span></code></pre></div>
 </div>
 <div id="go-garch-engine" class="section level2">
 <h2 class="hasAnchor">
@@ -408,11 +408,11 @@
 <code class="sourceCode R"><span class="va">predictions</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">.name</span> <span class="op">==</span> <span class="st">"garchcoef"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">.pred</span><span class="op">)</span>
 <span class="co">#&gt; $garchcoef</span>
 <span class="co">#&gt;                [,1]         [,2]         [,3]</span>
-<span class="co">#&gt; omega  2.708865e-02 1.214385e-01 1.147174e-01</span>
-<span class="co">#&gt; alpha1 5.563231e-02 2.564859e-01 1.025952e-01</span>
-<span class="co">#&gt; alpha2 9.253481e-02 9.389003e-11 3.590407e-11</span>
-<span class="co">#&gt; beta1  8.134963e-08 2.706378e-01 3.452711e-01</span>
-<span class="co">#&gt; beta2  8.209731e-01 3.998379e-01 4.402260e-01</span></code></pre></div>
+<span class="co">#&gt; omega  1.146187e-01 1.214044e-01 2.708272e-02</span>
+<span class="co">#&gt; alpha1 1.023942e-01 2.562106e-01 5.564904e-02</span>
+<span class="co">#&gt; alpha2 4.057236e-11 9.680419e-11 9.263418e-02</span>
+<span class="co">#&gt; beta1  3.443950e-01 2.708361e-01 3.347029e-08</span>
+<span class="co">#&gt; beta2  4.413970e-01 3.998549e-01 8.208619e-01</span></code></pre></div>
 </div>
 </div>
   </div>

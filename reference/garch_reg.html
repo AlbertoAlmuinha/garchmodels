@@ -190,10 +190,12 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
 <p><strong>rugarch (default)</strong></p>
 <p>The engine uses <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchspec-methods.html'>rugarch::ugarchspec()</a></code> and <code><a href='https://rdrr.io/pkg/rugarch/man/ugarchfit-methods.html'>rugarch::ugarchfit()</a></code>.</p>
 <p>Function Parameters:</p><pre><span class='co'>## Formal class 'standardGeneric' [package "methods"] with 8 slots</span>
-<span class='co'>##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, </span>
-<span class='co'>##     variance.targeting = FALSE), mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, </span>
-<span class='co'>##     arfima = FALSE, external.regressors = NULL, archex = FALSE), distribution.model = "norm", start.pars = list(), </span>
-<span class='co'>##     fixed.pars = list(), ...)  </span>
+<span class='co'>##   ..@ .Data     :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), </span>
+<span class='co'>##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
+<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, </span>
+<span class='co'>##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), </span>
+<span class='co'>##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), </span>
+<span class='co'>##     ...)  </span>
 <span class='co'>##   ..@ generic   : chr "ugarchspec"</span>
 <span class='co'>##   .. ..- attr(*, "package")= chr "rugarch"</span>
 <span class='co'>##   ..@ package   : chr "rugarch"</span>
@@ -201,10 +203,12 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
 <span class='co'>##   ..@ valueClass: chr(0) </span>
 <span class='co'>##   ..@ signature : chr [1:5] "variance.model" "mean.model" "distribution.model" "start.pars" ...</span>
 <span class='co'>##   ..@ default   :Formal class 'derivedDefaultMethod' [package "methods"] with 4 slots</span>
-<span class='co'>##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), submodel = NULL, external.regressors = NULL, </span>
-<span class='co'>##     variance.targeting = FALSE), mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, archpow = 1, </span>
-<span class='co'>##     arfima = FALSE, external.regressors = NULL, archex = FALSE), distribution.model = "norm", start.pars = list(), </span>
-<span class='co'>##     fixed.pars = list(), ...)  </span>
+<span class='co'>##   .. .. ..@ .Data  :function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), </span>
+<span class='co'>##     submodel = NULL, external.regressors = NULL, variance.targeting = FALSE), </span>
+<span class='co'>##     mean.model = list(armaOrder = c(1, 1), include.mean = TRUE, archm = FALSE, </span>
+<span class='co'>##         archpow = 1, arfima = FALSE, external.regressors = NULL, archex = FALSE), </span>
+<span class='co'>##     distribution.model = "norm", start.pars = list(), fixed.pars = list(), </span>
+<span class='co'>##     ...)  </span>
 <span class='co'>##   .. .. ..@ target :Formal class 'signature' [package "methods"] with 3 slots</span>
 <span class='co'>##   .. .. .. .. ..@ .Data  : chr "ANY"</span>
 <span class='co'>##   .. .. .. .. ..@ names  : chr "variance.model"</span>
@@ -215,7 +219,7 @@ set using <code>set_engine()</code> (See Engine Details below).</p></td>
 <span class='co'>##   .. .. .. .. ..@ package: chr "methods"</span>
 <span class='co'>##   .. .. ..@ generic: chr "ugarchspec"</span>
 <span class='co'>##   .. .. .. ..- attr(*, "package")= chr "rugarch"</span>
-<span class='co'>##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH", garchOrder = c(1, 1), subm| __truncated__ ...</span>
+<span class='co'>##   ..@ skeleton  : language (new("derivedDefaultMethod", .Data = function (variance.model = list(model = "sGARCH",      garchOrder = c(1, 1),| __truncated__ ...</span>
 </pre>
 
 <p>The Garch order for the variance model is provided using <code>arch_order</code> and <code>garch_order</code> parameters..
@@ -275,7 +279,7 @@ The <code>fit()</code> interface accepts date and date-time features and handles
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidymodels.tidymodels.org'>tidymodels</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>garchmodels</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/modeltime'>modeltime</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/business-science/timetk'>timetk</a></span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
 
