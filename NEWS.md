@@ -1,8 +1,4 @@
 
-# garchmodels 0.1.2
-
-- Fixed a small bug that prevented the use of formulas on variables in the fit, e.g.: __fit(y ~ date + month(date), data = df)__
-
 # garchmodels 0.1.1
 
 ### Tuning Parameters Univariate Garch Models

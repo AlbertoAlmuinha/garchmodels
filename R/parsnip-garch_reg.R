@@ -347,10 +347,10 @@ rugarch_fit_impl <- function(formula, data, a = 1, g = 1, ar = 1, ma = 1, tune_b
     
     y <- all.vars(formula)[1]
     x <- attr(stats::terms(formula, data = data), "term.labels")
-    x1 <- all.vars(formula)[2:length(all.vars(formula))]
+    #x1 <- all.vars(formula)[2:length(all.vars(formula))]
     
     outcome <- data[[y]]
-    predictors <- data %>% dplyr::select(dplyr::all_of(x1))
+    predictors <- data %>% dplyr::select(dplyr::all_of(x))
     
     # INDEX & PERIOD
     # Determine Period, Index Col, and Index
