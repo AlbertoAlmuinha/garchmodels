@@ -1,11 +1,12 @@
 
 
 # IMPORTS ----
+# - Parsnip gives user access to parsnip functions (fit.model_spec, set_engine)
+# - rugarch gives user acces to ugarspech options
 
-#' @import data.table
-#' @import modeltime
-#' @import collapse
-#' @import patchwork
+#' @import rugarch
+#' @import parsnip
+#' @import rmgarch
  
 # ON LOAD ----
 
@@ -16,9 +17,19 @@
 .onLoad <- function(libname, pkgname) {
     # This defines the model database
     
-    options(
-        time_scale_template = time_scale_template()
-    )
+    make_garch_reg()
+    
+    make_garch_reg_rugarch_rugarch()
+    
+    make_garch_multi_reg()
+    
+    make_garch_mutivariate_reg_rugarch_rugarch()
+    
+    make_garch_mutivariate_reg_rmgarch_dccrmgarch()
+    
+    make_garch_mutivariate_reg_rmgarch_crmgarch()
+    
+    make_garch_mutivariate_reg_rmgarch_gogarchrmgarch()
     
 }
 
