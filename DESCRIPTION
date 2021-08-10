@@ -1,4 +1,4 @@
-Package: garchmodels
+Package: fastime
 Title: The 'Tidymodels' Extension for GARCH Models 
 Version: 0.1.1
 Authors@R: c(
@@ -11,24 +11,19 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.5.0),
-    parsnip,
-    rugarch,
-    rmgarch
+    R (>= 3.5.0)
 Imports: 
     rlang (>= 0.1.2),
     magrittr,
-    purrr,
-    dplyr,
-    stringr,
-    tibble,
-    tidyr,
-    dials
+    data.table,
+    collapse,
+    modeltime,
+    timetk,
+    patchwork
 Suggests: 
     tidymodels,
     tidyverse,
-    modeltime,
-    timetk, 
+    ggpplot2,
     lubridate,
     knitr,
     rmarkdown,
