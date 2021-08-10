@@ -296,11 +296,11 @@ The <code>fit()</code> interface accepts date and date-time features and handles
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>daily_returns</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>rIBM_train</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>frequency = 5 observations per 1 week</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_garch_fit</span>, <span class='va'>rIBM_future</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 x 2</span><span>
-#&gt;   .name     .pred             
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> sigmaFor  </span><span style='color: #949494;'>&lt;dbl[,1] [24 × 1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> seriesFor </span><span style='color: #949494;'>&lt;dbl[,1] [24 × 1]&gt;</span><span></div><div class='input'>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 2</span>
+#&gt;   .name     .pred         
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;named list&gt;</span>  
+#&gt; <span style='color: #BCBCBC;'>1</span> sigmaFor  <span style='color: #949494;'>&lt;dbl [24 × 1]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>2</span> seriesFor <span style='color: #949494;'>&lt;dbl [24 × 1]&gt;</span></div><div class='input'>
 <span class='va'>model_garch_fit</span> <span class='op'>&lt;-</span><span class='fu'>garchmodels</span><span class='fu'>::</span><span class='fu'>garch_reg</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"regression"</span>,
                                         arch_order <span class='op'>=</span> <span class='fl'>2</span>,
                                         garch_order <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
@@ -310,12 +310,12 @@ The <code>fit()</code> interface accepts date and date-time features and handles
     <span class='fu'>fit</span><span class='op'>(</span><span class='va'>daily_returns</span> <span class='op'>~</span> <span class='va'>date</span>, data <span class='op'>=</span> <span class='va'>rIBM_train</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>frequency = 5 observations per 1 week</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>model_garch_fit</span>, <span class='va'>rIBM_future</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 2 x 2</span><span>
-#&gt;   .name     .pred             
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;named list&gt;</span><span>      
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> sigmaFor  </span><span style='color: #949494;'>&lt;dbl[,1] [24 × 1]&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> seriesFor </span><span style='color: #949494;'>&lt;dbl[,1] [24 × 1]&gt;</span><span></div><div class='input'><span class='co'># } </span>
-</div></span></pre>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2 × 2</span>
+#&gt;   .name     .pred         
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;named list&gt;</span>  
+#&gt; <span style='color: #BCBCBC;'>1</span> sigmaFor  <span style='color: #949494;'>&lt;dbl [24 × 1]&gt;</span>
+#&gt; <span style='color: #BCBCBC;'>2</span> seriesFor <span style='color: #949494;'>&lt;dbl [24 × 1]&gt;</span></div><div class='input'><span class='co'># } </span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
