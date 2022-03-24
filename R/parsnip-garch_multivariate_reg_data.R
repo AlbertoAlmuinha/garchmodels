@@ -2,6 +2,7 @@
 
 make_garch_multi_reg <- function() {
     parsnip::set_new_model("garch_multivariate_reg")
+    parsnip::set_model_mode("garch_multivariate_reg", "regression")
 }
 
 
